@@ -1,19 +1,21 @@
 # Tasks
-- Deploy to vercel
-- Landing page
-- Overall styling of selections
+- Arpeggios
+- Better fretboard styling
+  - Better 0 fret
+  - Unique indicator for 3/5/7/9/12
+- Interactive diagraming (adding notes to fretboard)
+- Ability to change tuning (probably a global store)
+- Improve keyboard styling
 
 # Major features
-- Implement keys version of chart
-- Arpeggios
 - Chord voicings
 - Set shapes
-- Backing tracks
-- Metronome
-- Time signature thing
 
 # Feature ideas
 - Some stuff to randomly generate musical ideas?
+- Backing tracks
+- Metronome
+- Time signature thing
 
 # Long tail
 - Add a ton of scales to the list
