@@ -43,6 +43,7 @@ export const ALL_NOTES: Array<Note> = [
 ];
 
 const MAJOR_INTERVALS = [0, 2, 4, 5, 7, 9, 11];
+const MELODIC_MINOR_INTERVALS = [0, 2, 3, 5, 7, 9, 11];
 
 // Quick utility for modes
 function rotateIntervals(intervals: Array<number>, n: number): Array<number> {
@@ -61,6 +62,7 @@ export type ScaleSequence = Sequence<number>;
 
 // TODO: Add more scales
 export const Scales = {
+    // Major scale modes
     Major: new Sequence(MAJOR_INTERVALS),
     Dorian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 1)),
     Phrygian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 2)),
@@ -69,6 +71,15 @@ export const Scales = {
     Aeolian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 5)),
     Minor: new Sequence(rotateIntervals(MAJOR_INTERVALS, 5)),
     Locrian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 6)),
+    // Melodic Minor Modes
+    MelodicMinor: new Sequence(MELODIC_MINOR_INTERVALS),
+    Dorianb9: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 1)),
+    LydianAugmented: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 2)),
+    LydianDominant: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 3)),
+    Mixolydianb13: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 4)),
+    LocrianSharp2: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 5)),
+    SuperLocrian: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 6)),
+    Altered: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 6)),
 }
 
 // This is way overly complicated...
