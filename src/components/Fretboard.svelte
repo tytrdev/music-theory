@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Sequence } from '$lib/sequence';
-	import { ALL_NOTES, Naturals, type Note } from '$lib/theory';
+	import { ALL_NOTES, Naturals, intervalBetween, type Note } from '$lib/theory';
 
 	export let root: Note;
 	export let notes: Array<Note>;
+  export let showIntervals = false;
 
 	const tuning: Array<Note> = [
         Naturals.E,
@@ -27,12 +28,24 @@
 		.map((_, i) => i);
 
 	// These are reactive so that they can be changed by parent components
-    $: isActive = function (note: Note): Boolean {
+    $: isActive = function (note: Note): boolean {
         return notes.includes(note);
     }
 
-    $: isRoot = function (note: Note): Boolean {
+    $: isRoot = function (note: Note): boolean {
         return note === root;
+    }
+
+    $: getDisplayInterval = function(note) {
+      if (showIntervals) {
+        return intervalBetween(root, note);
+      }
+
+      return note;
+    }
+
+    function toggleIntervalNames() {
+      showIntervals = !showIntervals;
     }
 </script>
 
@@ -46,7 +59,9 @@
 	{#each sequences as sequence}
 		<div class="string">
 			{#each sequence as note}
-				<div class="note" class:active={isActive(note)} class:root={isRoot(note)}>{note}</div>
+				<div class="note" class:active={isActive(note)} class:root={isRoot(note)}>
+          {getDisplayInterval(note)}
+        </div>
 			{/each}
 		</div>
 	{/each}
@@ -57,6 +72,14 @@
 		{/each}
 	</div>
 </div>
+
+<button on:click={toggleIntervalNames}>
+  {#if showIntervals}
+    Show Note Names
+  {:else}
+    Show Interval Names
+  {/if}
+</button>
 
 <style>
 	.fretboard {
@@ -93,13 +116,28 @@
 		color: black;
 	}
 
-    .active {
-        background: lightblue;
-		color: black;
-    }
+  .active {
+    background: lightblue;
+    color: black;
+  }
 
-    .root {
-        background: rgb(160, 72, 72);
-		color: black;
-    }
+  .root {
+    background: rgb(160, 72, 72);
+    color: black;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 1.3em;
+    border: none;
+    background-color: lightblue;
+    color: black;
+    transition: 0.2s linear;
+  }
+
+  button:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+  }
 </style>

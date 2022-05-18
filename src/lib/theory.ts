@@ -102,3 +102,30 @@ export function getScaleNotesFromRoot(root: Note, scale: ScaleSequence) {
 
     return scaleNotes;
 }
+
+// TODO: Move this to display logic
+const INTERVAL_NAMES = [
+  "R",
+  "b2",
+  "2",
+  "b3",
+  "3",
+  "4",
+  "#4",
+  "5",
+  "b6",
+  "6",
+  "b7",
+  "7",
+  "R",
+];
+
+export function intervalBetween(startNote: Note, endNote: Note) {
+  const i = ALL_NOTES.indexOf(startNote);
+  const j = ALL_NOTES.indexOf(endNote);
+
+  console.log("Interval Between: ", i, j);
+
+  if (i < j) return INTERVAL_NAMES[j - i];
+  return INTERVAL_NAMES[(j + 12) - i];
+}
