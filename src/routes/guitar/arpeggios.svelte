@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Sequence } from '$lib/sequence';
-	import { ALL_NOTES, getScaleNotesFromRoot, Naturals, Scales, type Note } from '$lib/theory';
+	import { ALL_NOTES, getArpeggioNotesFromRoot, Naturals, Arpeggios, type Note } from '$lib/theory';
     import Fretboard from '../../components/Fretboard.svelte';
 
 	const tuning: Array<Note> = [
@@ -25,29 +25,29 @@
 		.map((_, i) => i);
 
     // Selections
-    const scales = Object.keys(Scales);
+    const arpeggios = Object.keys(Arpeggios);
 
     $: selectedNote = 'A';
-    $: selectedScale = 'Major';
+    $: selectedArpeggio = 'Major';
 
     $: note = ALL_NOTES.find(note => note === selectedNote);
-    $: scale = Scales[selectedScale];
-    $: scaleNotes = getScaleNotesFromRoot(note, scale);
+    $: arpeggio = Arpeggios[selectedArpeggio];
+    $: arpeggioNotes = getArpeggioNotesFromRoot(note, arpeggio);
 
-    $: isActive = function (note: Note): Boolean {
-        return scaleNotes.includes(note);
+    $: isActive = function (note: Note): boolean {
+        return arpeggioNotes.includes(note);
     }
 
-    $: isRoot = function (note: Note): Boolean {
+    $: isRoot = function (note: Note): boolean {
         return note === selectedNote;
     }
 </script>
 
-<h1>Fretboard Tools</h1>
+<h3>Arpeggios</h3>
 
 <div class="selections">
     <div class="select-container">
-        <span>Note</span>
+        <span>Root</span>
 
         <select bind:value={selectedNote}>
             {#each ALL_NOTES as note}
@@ -57,18 +57,18 @@
     </div>
 
     <div class="select-container">
-        <span>Scale</span>
+        <span>Arpeggio</span>
 
-        <select bind:value={selectedScale}>
-            {#each scales as scale}
-                <option>{scale}</option>
+        <select bind:value={selectedArpeggio}>
+            {#each arpeggios as arpeggio}
+                <option>{arpeggio}</option>
             {/each}
         </select>
     </div>
 </div>
 
 <div class="fretboard">
-    <Fretboard root={note} notes={scaleNotes} />
+    <Fretboard root={note} notes={arpeggioNotes} />
 </div>
 
 <style>

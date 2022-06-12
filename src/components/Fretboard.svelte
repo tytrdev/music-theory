@@ -81,6 +81,30 @@
   {/if}
 </button>
 
+<div class="legend">
+  <h3>Legend</h3>
+
+  <span>
+    <div class="legend-note active">
+      {root}
+    </div>
+
+    <div>
+      In scale/arpeggio
+    </div>
+  </span>
+
+  <span>
+    <div class="legend-note root">
+      {root}
+    </div>
+
+    <div>
+      Root note
+    </div>
+  </span>
+</div>
+
 <style>
 	.fretboard {
 		display: flex;
@@ -139,5 +163,28 @@
     color: white;
     background-color: black;
     cursor: pointer;
+  }
+
+  .legend {
+    margin-top: 10px;
+  }
+
+  .legend-note {
+		display: flex;
+    width: 50px;
+    font-size: 2em;
+    font-weight: 600;
+    justify-content: center;
+    flex-shrink: 1;
+  }
+
+  .legend span {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .legend span div:not(.legend-note) {
+    margin-left: 10px;
   }
 </style>
