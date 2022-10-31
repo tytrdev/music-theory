@@ -39,19 +39,26 @@
 
  function setTuning(e) {
      const t = tunings[e.target.value];
-     console.log("Setting tuning: ", t);
      tuning.set(t);
  }
 </script>
 
-<p>
-    Thing
-</p>
+<div>
+    <label for="tuning">Tuning</label>
+    <select name="tuning" on:change={setTuning}>
+        {#each tuningKeys as tuningKey}
+            <option value={tuningKey}>
+                {tuningKey}
+            </option>
+        {/each}
+    </select>
 
-<select on:change={setTuning}>
-    {#each tuningKeys as tuningKey}
-        <option value={tuningKey}>
-            {tuningKey}
-        </option>
-    {/each}
-</select>
+    <label for="flip">Fretboard Flipped Vertically</label>
+    <input name="flip" type="checkbox" checked />
+</div>
+
+<style>
+ label {
+     margin-left: 10px;
+ }
+</style>

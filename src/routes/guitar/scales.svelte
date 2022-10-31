@@ -11,6 +11,16 @@
     $: note = ALL_NOTES.find(note => note === selectedNote);
     $: scale = Scales[selectedScale];
     $: scaleNotes = getScaleNotesFromRoot(note, scale);
+
+    function chooseRandomScale(): void {
+        const noteIndex = Math.floor(Math.random() * ALL_NOTES.length);
+        const scaleIndex = Math.floor(Math.random() * Object.keys(Scales).length);
+
+        const scaleKey = Object.keys(Scales)[scaleIndex];
+
+        selectedNote = ALL_NOTES[noteIndex];
+        selectedScale = scaleKey;
+    }
 </script>
 
 <h1>Fretboard Tools</h1>
@@ -35,6 +45,12 @@
             {/each}
         </select>
     </div>
+
+    <div>
+        <button on:click={chooseRandomScale}>
+            Random Scale
+        </button>
+    </div>
 </div>
 
 <div class="fretboard">
@@ -58,4 +74,19 @@
     .fretboard {
         width: 90%;
     }
+
+    button {
+        border: 1px solid white;
+        padding: 10px;
+        font-size: 1em;
+        cursor: pointer;
+    }
+
+
+ button:hover {
+     transition: 0.3s linear;
+     background: white;
+     border: 1px solid #559E55;
+     color: #559E55;
+ }
 </style>

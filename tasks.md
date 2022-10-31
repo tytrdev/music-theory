@@ -8,6 +8,7 @@
 - Ability to change tuning (probably a global store)
 - Improve keyboard styling
 - Add localstorage support for tuning and current scale
+- Clean up theory files/separation
 
 # Major features
 

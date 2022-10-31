@@ -11,8 +11,6 @@
   // Includes 0th fret
   const NUM_FRETS = 25;
 
-  $: console.log("Tuning is: ", $tuning);
-
 	$: sequences = $tuning.reverse().map((note) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);

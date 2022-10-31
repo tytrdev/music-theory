@@ -23,7 +23,6 @@
 
     $: min = Math.min(...frets);
     $: max = Math.max(...frets);
-    $: console.log("Max - min: ", max - min + 1 || 4);
 
     // Easy way to get 24 elements mapped to indices
     // Better than typing out an array with 0 - 23
