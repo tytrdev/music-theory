@@ -3,13 +3,19 @@
 <ul>
     <li>
         <a href="/guitar/scales">
-            Dynamic scale charts
+            Scales
         </a>
     </li>
 
     <li>
         <a href="/guitar/arpeggios">
-            Dynamic arpeggio charts
+            Arpeggios
+        </a>
+    </li>
+
+    <li>
+        <a href="/guitar/voicings">
+            Voicings
         </a>
     </li>
 </ul>

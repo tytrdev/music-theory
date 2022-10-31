@@ -1,13 +1,7 @@
-<ul>
-    <li>
-        <a href="/guitar">
-            Guitar Tools
-        </a>
-    </li>
+<p>
+    Music Theory Tools
+</p>
 
-    <li>
-        <a href="/keys">
-            Keyboard Tools
-        </a>
-    </li>
-</ul>
+<a href="/guitar/scales">
+    Scales
+</a>

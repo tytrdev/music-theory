@@ -1,33 +1,39 @@
 <script lang="ts">
 	import { Sequence } from '$lib/sequence';
-	import { ALL_NOTES, intervalBetween, type Note } from '$lib/theory';
+	import { ALL_NOTES, Naturals, intervalBetween, type Note } from '$lib/theory';
 
-  import { tuning, verticalFlipFretboard } from '../stores.ts';
+    export let root;
+	export let frets;
+    export let showIntervals = false;
 
-	export let root: Note;
-	export let notes: Array<Note>;
-  export let showIntervals = false;
+	const tuning: Array<Note> = [
+        Naturals.E,
+        Naturals.A,
+        Naturals.D,
+        Naturals.G,
+        Naturals.B,
+        Naturals.E
+    ].reverse();
 
-  // Includes 0th fret
-  const NUM_FRETS = 25;
-
-  $: console.log("Tuning is: ", $tuning);
-
-	$: sequences = $tuning.reverse().map((note) => {
+	$: sequences = tuning.map((note) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
-		return sequence.take(NUM_FRETS);
+		return sequence.take(max - min + 1);
 	});
+
+    $: min = Math.min(...frets);
+    $: max = Math.max(...frets);
+    $: console.log("Max - min: ", max - min + 1 || 4);
 
     // Easy way to get 24 elements mapped to indices
     // Better than typing out an array with 0 - 23
-	const fretMarkers = Array(NUM_FRETS)
+	$: fretMarkers = Array(max - min + 1)
 		.fill(0)
-		.map((_, i) => i);
+		.map((_, i) => i + min);
 
 	// These are reactive so that they can be changed by parent components
-    $: isActive = function (note: Note): boolean {
-        return notes.includes(note);
+    $: isActive = function (string: number, fret: number): boolean {
+        return frets[string] - min == fret;
     }
 
     $: isRoot = function (note: Note): boolean {
@@ -47,17 +53,17 @@
     }
 </script>
 
-<div class="fretboard">
+<div class="voicing">
 	<div class="string">
 		{#each fretMarkers as fretMarker}
 			<div class="note fret-marker">{fretMarker}</div>
 		{/each}
 	</div>
 
-	{#each sequences as sequence}
+	{#each sequences as sequence, string}
 		<div class="string">
-			{#each sequence as note}
-				<div class="note" class:active={isActive(note)} class:root={isRoot(note)}>
+			{#each sequence as note, fret}
+				<div class="note" class:active={isActive(string, fret)} class:root={isActive(string, fret) && isRoot(note)}>
           {getDisplayInterval(note)}
         </div>
 			{/each}
