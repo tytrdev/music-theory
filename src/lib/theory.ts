@@ -21,6 +21,23 @@ export enum Accidentals {
 	Gs = 'G#'
 }
 
+// Intervals
+export enum Intervals {
+	Root = 0,
+	Octave = 12,
+	MinorSecond = 1,
+	MajorSecond = 2,
+	MinorThird = 3,
+	MajorThird = 4,
+	PerfectFourth = 5,
+	AugmentedFourth = 6,
+	PerfectFifth = 7,
+	MinorSixth = 8,
+	MajorSixth = 9,
+	MinorSeventh = 10,
+	MajorSeventh = 11
+}
+
 // A note is either a Natural or an Accidental
 // This is a union type (and if it's not I should change this)
 export type Note = Naturals | Accidentals;
@@ -151,7 +168,37 @@ export function getArpeggioNotesFromRoot(root: Note, arpeggio: ArpeggioSequence)
 }
 
 // TODO: Move this to display logic
-const INTERVAL_NAMES = ['R', 'b2', '2', 'b3', '3', '4', '#4', '5', 'b6', '6', 'b7', '7', 'R'];
+export const INTERVAL_NAMES = [
+	'R',
+	'b2',
+	'2',
+	'b3',
+	'3',
+	'4',
+	'#4',
+	'5',
+	'b6',
+	'6',
+	'b7',
+	'7',
+	'R'
+];
+
+export const INTERVAL_DISPLAY_NAMES = [
+	'Root',
+	'Minor Second',
+	'Major Second',
+	'Minor Third',
+	'Major Third',
+	'Perfect Fourth',
+	'Augmented Fourth/Diminished Fifth',
+	'Perfect Fifth',
+	'Minor Sixth',
+	'Major Sixth',
+	'Minor Seventh',
+	'Major Seventh',
+	'Octave'
+];
 
 export function intervalBetween(startNote: Note, endNote: Note) {
 	const i = ALL_NOTES.indexOf(startNote);

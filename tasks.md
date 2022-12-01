@@ -1,14 +1,9 @@
 # Tasks
 
-- Arpeggios
-- Better fretboard styling
-  - Better 0 fret
-  - Unique indicator for 3/5/7/9/12
 - Interactive diagraming (adding notes to fretboard)
-- Ability to change tuning (probably a global store)
-- Improve keyboard styling
-- Add localstorage support for tuning and current scale
+- Add localstorage support for tuning and current scale/arpeggio
 - Clean up theory files/separation
+- Add keyboard pages back
 
 # Major features
 

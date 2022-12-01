@@ -43,7 +43,7 @@
  }
 </script>
 
-<div>
+<div id="footer">
     <label for="tuning">Tuning</label>
     <select name="tuning" on:change={setTuning}>
         {#each tuningKeys as tuningKey}
@@ -58,6 +58,10 @@
 </div>
 
 <style>
+ #footer {
+     position: fixed;
+     bottom: 0;
+ }
  label {
      margin-left: 10px;
  }

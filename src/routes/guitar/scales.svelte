@@ -82,11 +82,10 @@
         cursor: pointer;
     }
 
-
- button:hover {
-     transition: 0.3s linear;
-     background: white;
-     border: 1px solid #559E55;
-     color: #559E55;
- }
+    button:hover {
+        transition: 0.3s linear;
+        background: white;
+        border: 1px solid #559E55;
+        color: #559E55;
+    }
 </style>

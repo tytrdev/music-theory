@@ -41,6 +41,16 @@
     $: isRoot = function (note: Note): boolean {
         return note === selectedNote;
     }
+
+    function chooseRandomArpeggio(): void {
+        const noteIndex = Math.floor(Math.random() * ALL_NOTES.length);
+        const arpeggioIndex = Math.floor(Math.random() * Object.keys(Arpeggios).length);
+
+        const arpeggioKey = Object.keys(Arpeggios)[arpeggioIndex];
+
+        selectedNote = ALL_NOTES[noteIndex];
+        selectedArpeggio = arpeggioKey;
+    }
 </script>
 
 <h3>Arpeggios</h3>
@@ -65,6 +75,10 @@
             {/each}
         </select>
     </div>
+
+    <button on:click={chooseRandomArpeggio}>
+        Random Arpeggio
+    </button>
 </div>
 
 <div class="fretboard">
@@ -73,7 +87,12 @@
 
 <style>
     .selections {
+        display: flex;
         font-size: 2em;
+    }
+
+    span {
+        margin-left: 10px;
     }
 
     select {
@@ -82,5 +101,20 @@
 
     .fretboard {
         width: 90%;
+    }
+
+    button {
+        border: 1px solid white;
+        padding: 10px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    button:hover {
+        transition: 0.3s linear;
+        background: white;
+        border: 1px solid #559E55;
+        color: #559E55;
     }
 </style>
