@@ -4,7 +4,7 @@
 
  let note = Naturals.A;
  let interval = Intervals.MajorSecond;
- let target = Naturals.
+ let target = Naturals.A;
 
  const sequence = new Sequence(ALL_NOTES);
 
@@ -23,7 +23,7 @@
  }
 
  function attempt(noteValue) {
-     if sequence.get()
+     // if sequence.get()
  }
 </script>
 
