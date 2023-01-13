@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Sequence } from '$lib/sequence';
-	import { Accidentals, ALL_NOTES, Naturals, type Note } from '$lib/theory';
+	import { ALL_NOTES, Naturals, type Note } from '$lib/theory';
 
 	export let root: Note;
 	export let notes: Array<Note>;
@@ -11,15 +11,15 @@
 	const keys = sequence.take(15);
 
 	// These are reactive so that they can be changed by parent components
-	$: isActive = function (note: Note): Boolean {
+	$: isActive = function (note: Note): boolean {
 		return notes.includes(note);
 	};
 
-	$: isRoot = function (note: Note): Boolean {
+	$: isRoot = function (note: Note): boolean {
 		return note === root;
 	};
 
-	$: isNatural = function (note: Note): Boolean {
+	$: isNatural = function (note: Note): boolean {
 		return Naturals[note];
 	};
 </script>

@@ -59,6 +59,8 @@ export const ALL_NOTES: Array<Note> = [
 	Accidentals.Gs
 ];
 
+const MINOR_PENTATONIC_INTERVALS = [0, 3, 5, 7, 10];
+const MAJOR_PENTATONIC_INTERVALS = [0, 2, 4, 7, 9];
 const MAJOR_INTERVALS = [0, 2, 4, 5, 7, 9, 11];
 const MELODIC_MINOR_INTERVALS = [0, 2, 3, 5, 7, 9, 11];
 const HARMONIC_MINOR_INTERVALS = [0, 2, 3, 5, 7, 8, 11];
@@ -81,6 +83,9 @@ export type ArpeggioSequence = Sequence<number>;
 
 // TODO: Add more scales
 export const Scales = {
+  // Pentatonic Scales
+  MinorPentatonic: new Sequence(MINOR_PENTATONIC_INTERVALS),
+  MajorPentatonic: new Sequence(MAJOR_PENTATONIC_INTERVALS),
 	// Major scale modes
 	Major: new Sequence(MAJOR_INTERVALS),
 	Dorian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 1)),
