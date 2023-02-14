@@ -12,6 +12,8 @@
 - Make scales vs. arpeggios a switchable option
   - As opposed to two separate pages...
 
+- Vercel build
+
 # Major features
 
 - Chord voicings
