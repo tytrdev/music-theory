@@ -13,12 +13,11 @@
 	const NUM_FRETS = 23;
 
   $: tuningNotes = ALL_TUNINGS[$tuning];
-  $: console.log("tuningNotes: ", tuningNotes, "tuning", $tuning);
 
 	$: sequences = tuningNotes.reverse().map((note, i) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
-		return [`${tuningNotes.length - i}`, ...sequence.take(NUM_FRETS)];
+		return [`${i + 1}`, ...sequence.take(NUM_FRETS)];
 	});
 
 	// Easy way to get 24 elements mapped to indices
@@ -53,21 +52,21 @@
 	}
 </script>
 
-<div class="flex flex-col w-full m-5 self-center border rounded border-primary">
+<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary">
 	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow text-center basis-0">{fretMarker}</div>
+			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">{fretMarker}</div>
 		{/each}
 	</div>
 
 	{#each sequences as sequence}
 		<div class="flex w-full justify-evenly">
 			{#each sequence as note}
-				<div class="grow text-center basis-0 relative" class:active={isActive(note)} class:root={isRoot(note)}>
+				<div class="grow h-8 text-2xl font-bold text-center basis-0 relative" class:active={isActive(note)} class:root={isRoot(note)}>
 					{getDisplayInterval(note)}
 
           {#if note.length > 1}
-            <span class="absolute top-0">
+            <span class="text-sm absolute top-0">
               ♯
             </span>
           {/if}
@@ -76,9 +75,9 @@
 		</div>
 	{/each}
 
-	<div class="flex w-full justify-evenly">
+	<div class="flex w-full mt-5 justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow text-center basis-0">{fretMarker}</div>
+			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">{fretMarker}</div>
 		{/each}
 	</div>
 </div>

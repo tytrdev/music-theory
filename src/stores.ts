@@ -15,7 +15,6 @@ function getDefaultTuning(): string {
 export const tuning: Writable<string> = writable(getDefaultTuning());
 tuning.subscribe(t => {
 	if (browser) {
-		console.log("Setting localStorage", t);
 		localStorage.setItem('mt.tuningkey', t);
 	}
 })

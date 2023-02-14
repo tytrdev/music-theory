@@ -8,18 +8,11 @@
 		type Note,
 		type ScaleSequence
 	} from '$lib/theory';
-	import Fretboard from '../../components/Fretboard.svelte';
-	import Settings from '../../components/Settings.svelte';
+	import Fretboard from '../../../components/Fretboard.svelte';
+	import Settings from '../../../components/Settings.svelte';
 
 	// Selections
 	const scales = Object.keys(Scales);
-
-	enum VisualizationType {
-		Scales,
-		Arpeggios
-	}
-
-	let visualizationType = VisualizationType.Scales;
 
 	$: selectedNote = 'A';
 	$: selectedScale = 'Major';
@@ -29,12 +22,7 @@
 	$: scaleNotes = getNotes(note, scale);
 
 	function getNotes(note: Note, scale: ScaleSequence) {
-		if (visualizationType === VisualizationType.Scales) {
-			return getScaleNotesFromRoot(note, scale);
-		}
-
-		// Arpeggios
-		return getArpeggioNotesFromRoot(note, scale);
+        return getScaleNotesFromRoot(note, scale);
 	}
 
 	// TODO: Make sure same exact root/scale combo can't be chosen
@@ -47,34 +35,9 @@
 		selectedNote = ALL_NOTES[noteIndex];
 		selectedScale = scaleKey;
 	}
-
-	function setScales() {
-		visualizationType = VisualizationType.Scales;
-	}
-
-	function setArpeggios() {
-		visualizationType = VisualizationType.Arpeggios;
-	}
 </script>
 
-<h1 class="text-4xl mb-5">Fretboard Visualizer</h1>
-
-<div class="btn-group mb-5">
-	<button
-		class="btn btn-lg"
-		class:btn-active={visualizationType === VisualizationType.Scales}
-		on:click={setScales}
-	>
-		Scales
-	</button>
-	<button
-		class="btn btn-lg"
-		class:btn-active={visualizationType === VisualizationType.Arpeggios}
-		on:click={setArpeggios}
-	>
-		Arpeggios
-	</button>
-</div>
+<h1 class="text-4xl mb-5">Fretboard Visualizer - Scales</h1>
 
 <div class="flex mb-5 flex-col md:flex-row">
 	<span class="text-3xl mr-5 self-center">Note</span>

@@ -5,7 +5,6 @@
 	const tuningKeys = Object.keys(ALL_TUNINGS);
 
 	function setTuning(e) {
-        console.log("Setting tuning", e.target.value);
 		tuning.set(e.target.value);
 	}
 
@@ -16,8 +15,8 @@
 		});
 	}
 
-    function setHFlip() {
-    }
+    // function setHFlip() {
+    // }
 </script>
 
 <div class="flex flex-col md:flex-row mt-10">
@@ -32,13 +31,13 @@
 		</select>
 	</div>
 
-	<div class="flex items-center justify-center mt-5 md:mt-0">
+	<!-- <div class="flex items-center justify-center mt-5 md:mt-0">
 		<label for="flip" class="mr-2 self-center">Vertical Flip</label>
 		<input name="flip" type="checkbox" class="checkbox self-center" checked on:change={setFlip} />
-	</div>
+	</div> -->
 
-	<div class="flex items-center justify-center ml-5 mt-5 md:mt-0">
+	<!-- <div class="flex items-center justify-center ml-5 mt-5 md:mt-0">
 		<label for="flip" class="mr-2 self-center">Horizontal Flip</label>
 		<input name="flip" type="checkbox" class="checkbox self-center" on:change={setHFlip} />
-	</div>
+	</div> -->
 </div>
