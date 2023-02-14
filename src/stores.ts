@@ -1,15 +1,26 @@
+import { browser } from '$app/environment';
 import { writable, type Writable } from 'svelte/store';
-import { Naturals, type Note } from '$lib/theory';
 
-export const tuning: Writable<Array<Note>> = writable([
-	Naturals.E,
-	Naturals.A,
-	Naturals.D,
-	Naturals.G,
-	Naturals.C,
-	Naturals.F
-]);
+function getDefaultTuning(): string {
+	if (browser) {
+		const localStorageTuning = localStorage.getItem('mt.tuningkey');
+		if (localStorageTuning) {
+			return localStorageTuning;
+		}
+	}
 
-export const verticalFlipFretboard = writable(true);
+	return "Guitar - Fourths";
+}
+
+export const tuning: Writable<string> = writable(getDefaultTuning());
+tuning.subscribe(t => {
+	if (browser) {
+		console.log("Setting localStorage", t);
+		localStorage.setItem('mt.tuningkey', t);
+	}
+})
 
 export const showIntervals = writable(true);
+
+// TODO: Vertical Flip uses localStorage
+export const verticalFlip: Writable<boolean> = writable(true);

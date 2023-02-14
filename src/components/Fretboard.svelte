@@ -1,186 +1,130 @@
 <script lang="ts">
 	import { Sequence } from '$lib/sequence';
 	import { ALL_NOTES, intervalBetween, type Note } from '$lib/theory';
+	import { ALL_TUNINGS } from '$lib/tunings';
 
-  import { tuning, verticalFlipFretboard } from '../stores.ts';
+	import { tuning } from '../stores';
 
 	export let root: Note;
 	export let notes: Array<Note>;
-  export let showIntervals = false;
+	export let showIntervals = false;
 
-  // Includes 0th fret
-  const NUM_FRETS = 25;
+	// Includes 0th fret
+	const NUM_FRETS = 23;
 
-	$: sequences = $tuning.reverse().map((note) => {
+  $: tuningNotes = ALL_TUNINGS[$tuning];
+  $: console.log("tuningNotes: ", tuningNotes, "tuning", $tuning);
+
+	$: sequences = tuningNotes.reverse().map((note, i) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
-		return sequence.take(NUM_FRETS);
+		return [`${tuningNotes.length - i}`, ...sequence.take(NUM_FRETS)];
 	});
 
-    // Easy way to get 24 elements mapped to indices
-    // Better than typing out an array with 0 - 23
-	const fretMarkers = Array(NUM_FRETS)
+	// Easy way to get 24 elements mapped to indices
+	// Better than typing out an array with 0 - 23
+	const fretMarkers = [' ', ...Array(NUM_FRETS)
 		.fill(0)
-		.map((_, i) => i);
+		.map((_, i) => i)];
 
 	// These are reactive so that they can be changed by parent components
-    $: isActive = function (note: Note): boolean {
-        return notes.includes(note);
-    }
+	$: isActive = function (note: Note): boolean {
+		return notes.includes(note);
+	};
 
-    $: isRoot = function (note: Note): boolean {
-        return note === root;
-    }
+	$: isRoot = function (note: Note): boolean {
+		return note === root;
+	};
 
-    $: getDisplayInterval = function(note) {
-      if (showIntervals) {
-        return intervalBetween(root, note);
-      }
+	$: getDisplayInterval = function (note) {
+		if (showIntervals) {
+			return intervalBetween(root, note);
+		}
 
+    if (note.length === 1) {
       return note;
     }
 
-    function toggleIntervalNames() {
-      showIntervals = !showIntervals;
-    }
+		return note[0];
+	};
+
+	function toggleIntervalNames() {
+		showIntervals = !showIntervals;
+	}
 </script>
 
-<div class="fretboard">
-	<div class="string">
+<div class="flex flex-col w-full m-5 self-center border rounded border-primary">
+	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="note fret-marker">{fretMarker}</div>
+			<div class="grow text-center basis-0">{fretMarker}</div>
 		{/each}
 	</div>
 
 	{#each sequences as sequence}
-		<div class="string">
+		<div class="flex w-full justify-evenly">
 			{#each sequence as note}
-				<div class="note" class:active={isActive(note)} class:root={isRoot(note)}>
-          {getDisplayInterval(note)}
-        </div>
+				<div class="grow text-center basis-0 relative" class:active={isActive(note)} class:root={isRoot(note)}>
+					{getDisplayInterval(note)}
+
+          {#if note.length > 1}
+            <span class="absolute top-0">
+              ♯
+            </span>
+          {/if}
+				</div>
 			{/each}
 		</div>
 	{/each}
 
-	<div class="string">
+	<div class="flex w-full justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="note fret-marker">{fretMarker}</div>
+			<div class="grow text-center basis-0">{fretMarker}</div>
 		{/each}
 	</div>
 </div>
 
-<button on:click={toggleIntervalNames}>
-  {#if showIntervals}
-    Show Note Names
-  {:else}
-    Show Interval Names
-  {/if}
+<button class="btn btn-lg btn-primary self-center max-w-fit mt-5" on:click={toggleIntervalNames}>
+	{#if showIntervals}
+		Show Note Names
+	{:else}
+		Show Interval Names
+	{/if}
 </button>
 
-<div class="legend">
-  <h3>Legend</h3>
+<div class="self-center mt-5">
+	<h3 class="text-4xl self-center">Legend</h3>
 
-  <span>
-    <div class="legend-note active">
-      {root}
-    </div>
+	<div class="mt-6">
+		<span class="active p-5">
+			{root}
+		</span>
 
-    <div>
-      In scale/arpeggio
-    </div>
-  </span>
+		<span> In scale/arpeggio </span>
+	</div>
 
-  <span>
-    <div class="legend-note root">
-      {root}
-    </div>
+	<div class="mt-10">
+		<span class="root p-5">
+			{root}
+		</span>
 
-    <div>
-      Root note
-    </div>
-  </span>
+		<span> Root note </span>
+	</div>
+
+	<div class="mt-10">
+		<span class="border border-primary p-5">
+			{root}
+		</span>
+
+		<span>Not in scale/arpeggio</span>
+	</div>
 </div>
 
-<style>
-	.fretboard {
-		display: flex;
-		flex-direction: column;
-		border: 5px solid black;
-		font-size: 1.3em;
-		font-weight: 600;
+<style lang="postcss">
+	.root {
+		background: theme(colors.primary) !important;
 	}
 
-	.string {
-		display: flex;
-		width: 100%;
-		justify-content: space-evenly;
+	.active {
+		background: theme(colors.secondary);
 	}
-
-	.string:not(:last-child) {
-		border-bottom: 1px solid black;
-	}
-
-	.note {
-		display: flex;
-		flex-grow: 0;
-		width: 100%;
-		justify-content: center;
-	}
-
-	.note:not(:last-child) {
-		border-right: 1px solid black;
-	}
-
-	.fret-marker {
-		background: white;
-		color: black;
-	}
-
-  .active {
-    background: lightblue;
-    color: black;
-  }
-
-  .root {
-    background: rgb(160, 72, 72);
-    color: black;
-  }
-
-  button {
-    padding: 10px;
-    font-size: 1.3em;
-    border: none;
-    background-color: lightblue;
-    color: black;
-    transition: 0.2s linear;
-  }
-
-  button:hover {
-    color: white;
-    background-color: black;
-    cursor: pointer;
-  }
-
-  .legend {
-    margin-top: 10px;
-  }
-
-  .legend-note {
-		display: flex;
-    width: 50px;
-    font-size: 2em;
-    font-weight: 600;
-    justify-content: center;
-    flex-shrink: 1;
-  }
-
-  .legend span {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-  }
-
-  .legend span div:not(.legend-note) {
-    margin-left: 10px;
-  }
 </style>

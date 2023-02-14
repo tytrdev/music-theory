@@ -1,9 +1,20 @@
 # Tasks
 
-- Interactive diagraming (adding notes to fretboard)
-- Add localstorage support for tuning and current scale/arpeggio
-- Clean up theory files/separation
-- Add keyboard pages back
+## Initial Release
+- Make scales vs. arpeggios a switchable option
+  - As opposed to two separate pages...
+- Redesign fretboard layout
+- Get settings working with local storage
+- Add reasonable list of default tunings
+- Fix fretboard vertical flip option
+- Clean up scale/chord names for selections
+- Fix interval names
+- Make the view mobile-friendly
+- Experiment with adding circles or whatever to active notes
+- Add exhaustive list of scales and chords 
+- Make scales/chords directly linkable/bookmarkable
+
+- Recommendations page
 
 # Major features
 
