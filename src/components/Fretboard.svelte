@@ -9,22 +9,39 @@
 	export let notes: Array<Note>;
 	export let showIntervals = false;
 
-	// Includes 0th fret
-	const NUM_FRETS = 23;
+	const minWidthForFullFretboard = 1000;
+	let windowWidth = Infinity;
 
-  $: tuningNotes = ALL_TUNINGS[$tuning];
+	$: microView = windowWidth < minWidthForFullFretboard;
+
+	// Includes 0th fret
+	$: NUM_FRETS = microView ? 8 : 23;
+
+	$: tuningNotes = ALL_TUNINGS[$tuning];
 
 	$: sequences = tuningNotes.reverse().map((note, i) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
+
+		if (microView) {
+			return sequence.take(NUM_FRETS);
+		}
+
 		return [`${i + 1}`, ...sequence.take(NUM_FRETS)];
 	});
 
 	// Easy way to get 24 elements mapped to indices
 	// Better than typing out an array with 0 - 23
-	const fretMarkers = [' ', ...Array(NUM_FRETS)
-		.fill(0)
-		.map((_, i) => i)];
+	$: fretMarkers = microView
+		? Array(NUM_FRETS)
+				.fill(0)
+				.map((_, i) => i)
+		: [
+				' ',
+				...Array(NUM_FRETS)
+					.fill(0)
+					.map((_, i) => i)
+		  ];
 
 	// These are reactive so that they can be changed by parent components
 	$: isActive = function (note: Note): boolean {
@@ -40,9 +57,9 @@
 			return intervalBetween(root, note);
 		}
 
-    if (note.length === 1) {
-      return note;
-    }
+		if (note.length === 1) {
+			return note;
+		}
 
 		return note[0];
 	};
@@ -52,24 +69,31 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} />
+
 <div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary">
 	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">{fretMarker}</div>
+			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+				{fretMarker}
+			</div>
 		{/each}
 	</div>
 
 	{#each sequences as sequence}
 		<div class="flex w-full justify-evenly">
-			{#each sequence as note}
-				<div class="grow h-8 text-2xl font-bold text-center basis-0 relative" class:active={isActive(note)} class:root={isRoot(note)}>
+			{#each sequence as note, i}
+				<div
+					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask mask-circle m-1"
+					class:active={isActive(note)}
+					class:root={isRoot(note)}
+					class:open={i === 0}
+				>
 					{getDisplayInterval(note)}
 
-          {#if note.length > 1}
-            <span class="text-sm absolute top-0">
-              ♯
-            </span>
-          {/if}
+					{#if note.length > 1}
+						<span class="text-sm absolute top-0"> ♯ </span>
+					{/if}
 				</div>
 			{/each}
 		</div>
@@ -77,7 +101,9 @@
 
 	<div class="flex w-full mt-5 justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">{fretMarker}</div>
+			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+				{fretMarker}
+			</div>
 		{/each}
 	</div>
 </div>
@@ -110,6 +136,14 @@
 	</div>
 
 	<div class="mt-10">
+		<span class="open p-5">
+			{root}
+		</span>
+
+		<span> Open String </span>
+	</div>
+
+	<div class="mt-10">
 		<span class="border border-primary p-5">
 			{root}
 		</span>
@@ -125,5 +159,9 @@
 
 	.active {
 		background: theme(colors.secondary);
+	}
+
+	.open {
+		background: theme(colors.accent);
 	}
 </style>
