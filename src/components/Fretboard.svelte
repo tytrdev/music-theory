@@ -87,7 +87,7 @@
 					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask mask-circle m-1"
 					class:active={isActive(note)}
 					class:root={isRoot(note)}
-					class:open={i === 0}
+					class:open={microView ? i === 0 : i === 1}
 				>
 					{getDisplayInterval(note)}
 
