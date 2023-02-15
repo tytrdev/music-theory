@@ -19,7 +19,7 @@
 
 	$: tuningNotes = ALL_TUNINGS[$tuning];
 
-	$: sequences = tuningNotes.reverse().map((note, i) => {
+	$: sequences = tuningNotes.slice().reverse().map((note, i) => {
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
 
