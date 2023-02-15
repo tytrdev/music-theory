@@ -59,6 +59,21 @@ export const ALL_NOTES: Array<Note> = [
 	Accidentals.Gs
 ];
 
+export const RELATIVE_MINORS = new Map<Note, Note>([
+	[Naturals.A, Accidentals.Fs],
+	[Accidentals.As, Naturals.G],
+	[Naturals.B, Accidentals.Gs],
+	[Naturals.C, Naturals.A],
+	[Accidentals.Cs, Accidentals.As],
+	[Naturals.D, Naturals.B],
+	[Accidentals.Ds, Naturals.C],
+	[Naturals.E, Accidentals.Cs],
+	[Naturals.F, Naturals.D],
+	[Accidentals.Fs, Accidentals.Ds],
+	[Naturals.G, Naturals.E],
+	[Accidentals.Gs, Naturals.F],
+]);
+
 const MINOR_PENTATONIC_INTERVALS = [0, 3, 5, 7, 10];
 const MAJOR_PENTATONIC_INTERVALS = [0, 2, 4, 7, 9];
 const MAJOR_INTERVALS = [0, 2, 4, 5, 7, 9, 11];
@@ -83,9 +98,9 @@ export type ArpeggioSequence = Sequence<number>;
 
 // TODO: Add more scales
 export const Scales = {
-  // Pentatonic Scales
-  MinorPentatonic: new Sequence(MINOR_PENTATONIC_INTERVALS),
-  MajorPentatonic: new Sequence(MAJOR_PENTATONIC_INTERVALS),
+	// Pentatonic Scales
+	MinorPentatonic: new Sequence(MINOR_PENTATONIC_INTERVALS),
+	MajorPentatonic: new Sequence(MAJOR_PENTATONIC_INTERVALS),
 	// Major scale modes
 	Major: new Sequence(MAJOR_INTERVALS),
 	Dorian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 1)),
@@ -112,6 +127,43 @@ export const Scales = {
 	PhrygianDominant: new Sequence(HARMONIC_MINOR_INTERVALS),
 	LydianSharp2: new Sequence(HARMONIC_MINOR_INTERVALS),
 	SuperLocrianDoubleFlat7: new Sequence(HARMONIC_MINOR_INTERVALS)
+};
+
+export enum ScaleType {
+	Major = "Major",
+	Minor = "Minor"
+}
+
+export const ScaleTypes = {
+	// Pentatonic Scales
+	MinorPentatonic: ScaleType.Minor,
+	MajorPentatonic: ScaleType.Major,
+	// Major scale modes
+	Major: ScaleType.Major,
+	Dorian: ScaleType.Major,
+	Phrygian: ScaleType.Major,
+	Lydian: ScaleType.Major,
+	Mixolydian: ScaleType.Major,
+	Aeolian: ScaleType.Major,
+	Minor: ScaleType.Minor,
+	Locrian: ScaleType.Major,
+	// Melodic Minor Modes
+	MelodicMinor: ScaleType.Minor,
+	Dorianb9: ScaleType.Minor,
+	LydianAugmented: ScaleType.Minor,
+	LydianDominant: ScaleType.Minor,
+	Mixolydianb13: ScaleType.Minor,
+	LocrianSharp2: ScaleType.Minor,
+	SuperLocrian: ScaleType.Minor,
+	Altered: ScaleType.Minor,
+	// Harmonic Minor Modes
+	HarmonicMinor: ScaleType.Minor,
+	LocrianNatural6: ScaleType.Minor,
+	IonianSharp5: ScaleType.Minor,
+	DorianSharp11: ScaleType.Minor,
+	PhrygianDominant: ScaleType.Minor,
+	LydianSharp2: ScaleType.Minor,
+	SuperLocrianDoubleFlat7: ScaleType.Minor
 };
 
 export const Arpeggios = {

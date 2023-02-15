@@ -1,3 +1,5 @@
+<!-- padding so the footer doesn't block the bottom elements -->
+<div class="bottom-0 items-center p-8"></div>
 <footer class="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
 	<div class="flex justify-center w-full">
 		<!-- Twitter -->

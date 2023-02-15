@@ -1,10 +1,12 @@
 <script lang="ts">
 	import {
 		ALL_NOTES,
+		RELATIVE_MINORS,
 		getArpeggioNotesFromRoot,
 		getScaleNotesFromRoot,
 		Naturals,
 		Scales,
+		ScaleTypes, ScaleType,
 		type Note,
 		type ScaleSequence
 	} from '$lib/theory';
@@ -20,6 +22,17 @@
 	$: note = ALL_NOTES.find((note) => note === selectedNote);
 	$: scale = Scales[selectedScale];
 	$: scaleNotes = getNotes(note, scale);
+	$: scaleType = ScaleTypes[selectedScale];
+	$: inverseScaleType = ScaleTypes[selectedScale] === ScaleType.Major ? ScaleType.Minor : ScaleType.Major;
+
+	function getValue(map, searchValue) {
+		for (let [k, v] of map.entries()) {
+			if (v === searchValue)
+				return k;
+		}
+	}
+
+	$: relative_root = ScaleTypes[selectedScale] === ScaleType.Major ? RELATIVE_MINORS.get(note) : getValue(RELATIVE_MINORS, note);
 
 	function getNotes(note: Note, scale: ScaleSequence) {
         return getScaleNotesFromRoot(note, scale);
@@ -60,7 +73,7 @@
 </div>
 
 <div class="flex flex-col w-full">
-	<Fretboard root={note} notes={scaleNotes} />
+	<Fretboard root={note} scale_type={inverseScaleType} root_relative={relative_root} notes={scaleNotes} />
 </div>
 
 <Settings />
