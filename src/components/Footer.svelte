@@ -1,3 +1,4 @@
+<div class="bottom-0 items-center p-8 mt-5"></div>
 <footer class="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
 	<div class="flex justify-center w-full">
 		<!-- Twitter -->
