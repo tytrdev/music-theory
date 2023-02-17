@@ -80,7 +80,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary divide-y-2 divide-dashed divide-slate-600">
+<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary divide-y-2 divide-dashed divide-slate-700">
 	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
 			<div class="grow h-9 dark:text-secondary text-2xl font-bold text-center basis-0 border-2 border-transparent"
@@ -181,26 +181,28 @@
 
 	.fretmarker-dot {
 		border-bottom-color:theme(colors.accent);
+		border-style: none none solid none;
 		/* border-top-color:theme(colors.accent); */
 	}
 
 	.fretmarker-double-dot {
 		border-bottom-color:theme(colors.accent);
 		/* border-top-color:theme(colors.accent); */
-		border-style:double;
+		border-style: none none double none;
 		border-width:4px;
 	}
 
 
 	.fretmarker-dot-bottom {
 		border-top-color:theme(colors.accent);
+		border-style:solid none none none;
 		/* border-top-color:theme(colors.accent); */
 	}
 
 	.fretmarker-double-dot-bottom {
 		border-top-color:theme(colors.accent);
 		/* border-top-color:theme(colors.accent); */
-		border-style:double;
+		border-style:double none none none;
 		border-width:4px;
 	}
 </style>
