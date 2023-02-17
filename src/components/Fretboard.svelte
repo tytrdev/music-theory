@@ -67,27 +67,39 @@
 	function toggleIntervalNames() {
 		showIntervals = !showIntervals;
 	}
+
+	function fretMarkerHasDot(marker) {
+		return marker === 5 || marker === 7 || marker === 9 || marker === 15 || marker == 17 || marker == 19 || marker == 21;
+	}
+
+	function fretMarkerHasDoubleDot(marker) {
+		return marker > 1 && marker % 12 === 0;
+	}
+
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary">
+<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary divide-y-2 divide-dashed divide-slate-600">
 	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+			<div class="grow h-9 dark:text-secondary text-2xl font-bold text-center basis-0 border-2 border-transparent"
+				class:fretmarker-dot={fretMarkerHasDot(fretMarker)}
+				class:fretmarker-double-dot={fretMarkerHasDoubleDot(fretMarker)}>
 				{fretMarker}
 			</div>
 		{/each}
 	</div>
 
 	{#each sequences as sequence}
-		<div class="flex w-full justify-evenly">
+		<div class="flex w-full justify-evenly divide-slate-800">
 			{#each sequence as note, i}
 				<div
-					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask mask-circle m-1"
+					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask m-1"
 					class:active={isActive(note)}
 					class:root={isRoot(note)}
 					class:open={microView ? i === 0 : i === 1}
+					class:mask-circle={microView ? i !== 0 : i !== 1}
 				>
 					{getDisplayInterval(note)}
 
@@ -99,9 +111,11 @@
 		</div>
 	{/each}
 
-	<div class="flex w-full mt-5 justify-evenly">
+	<div class="flex w-full justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+			<div class="grow h-8 mt-1 dark:text-secondary text-2xl font-bold text-center basis-0 border-2 border-transparent"
+				class:fretmarker-dot-bottom={fretMarkerHasDot(fretMarker)}
+				class:fretmarker-double-dot-bottom={fretMarkerHasDoubleDot(fretMarker)}>
 				{fretMarker}
 			</div>
 		{/each}
@@ -163,5 +177,30 @@
 
 	.open {
 		background: theme(colors.accent);
+	}
+
+	.fretmarker-dot {
+		border-bottom-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+	}
+
+	.fretmarker-double-dot {
+		border-bottom-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+		border-style:double;
+		border-width:4px;
+	}
+
+
+	.fretmarker-dot-bottom {
+		border-top-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+	}
+
+	.fretmarker-double-dot-bottom {
+		border-top-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+		border-style:double;
+		border-width:4px;
 	}
 </style>
