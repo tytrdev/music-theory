@@ -14,7 +14,7 @@
 
 	$: microView = windowWidth < minWidthForFullFretboard;
 
-	let hideStringNumbers = microView || false;
+	$: hideStringNumbers = microView || false;
 
 	// Includes 0th fret
 	$: NUM_FRETS = microView ? 8 : 23;
