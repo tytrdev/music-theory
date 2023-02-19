@@ -98,7 +98,7 @@
 			{#each sequence as note, i}
 				<div
 					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask m-1"
-					class:active={isActive(note)}
+					class:active={isActive(note) && !isRoot(note)}
 					class:root={isRoot(note)}
 					class:open={hideStringNumbers ? i === 0 : i === 1}
 					class:mask-circle={hideStringNumbers ? i !== 0 : i !== 1}
@@ -175,7 +175,7 @@
 	}
 
 	.active {
-		background: theme(colors.secondary);
+		background: theme(colors.secondary) !important;
 	}
 
 	.open {
