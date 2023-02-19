@@ -14,6 +14,8 @@
 
 	$: microView = windowWidth < minWidthForFullFretboard;
 
+	$: hideStringNumbers = microView || false;
+
 	// Includes 0th fret
 	$: NUM_FRETS = microView ? 8 : 23;
 
@@ -23,7 +25,7 @@
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
 
-		if (microView) {
+		if (hideStringNumbers) {
 			return sequence.take(NUM_FRETS);
 		}
 
@@ -32,7 +34,7 @@
 
 	// Easy way to get 24 elements mapped to indices
 	// Better than typing out an array with 0 - 23
-	$: fretMarkers = microView
+	$: fretMarkers = hideStringNumbers
 		? Array(NUM_FRETS)
 				.fill(0)
 				.map((_, i) => i)
@@ -67,27 +69,40 @@
 	function toggleIntervalNames() {
 		showIntervals = !showIntervals;
 	}
+
+	function fretMarkerHasDot(marker) {
+		return marker === 3 || marker === 5 || marker === 7 || marker === 9 || marker === 15 || marker == 17 || marker == 19 || marker == 21;
+	}
+
+	function fretMarkerHasDoubleDot(marker) {
+		return marker > 1 && marker % 12 === 0;
+	}
+
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary">
+<div class="flex flex-col w-11/12 p-3 self-center border rounded border-primary divide-y-2 divide-dashed divide-slate-700">
 	<div class="flex w-full center justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+			<div class="grow h-9 dark:text-secondary text-2xl font-bold text-center basis-0 border-2 border-transparent"
+				class:fretmarker-dot={fretMarkerHasDot(fretMarker)}
+				class:fretmarker-double-dot={fretMarkerHasDoubleDot(fretMarker)}>
 				{fretMarker}
 			</div>
 		{/each}
 	</div>
 
 	{#each sequences as sequence}
-		<div class="flex w-full justify-evenly">
+		<div class="flex w-full justify-evenly divide-slate-800">
 			{#each sequence as note, i}
 				<div
-					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask mask-circle m-1"
-					class:active={isActive(note)}
+					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask m-1"
+					class:active={isActive(note) && !isRoot(note)}
 					class:root={isRoot(note)}
-					class:open={microView ? i === 0 : i === 1}
+					class:open={hideStringNumbers ? i === 0 : i === 1}
+					class:mask-circle={hideStringNumbers ? i !== 0 : i !== 1}
+					class:dark:text-secondary={!hideStringNumbers && i == 0}
 				>
 					{getDisplayInterval(note)}
 
@@ -99,9 +114,11 @@
 		</div>
 	{/each}
 
-	<div class="flex w-full mt-5 justify-evenly">
+	<div class="flex w-full justify-evenly">
 		{#each fretMarkers as fretMarker}
-			<div class="grow h-12 dark:text-secondary text-2xl font-bold text-center basis-0">
+			<div class="grow h-8 mt-1 dark:text-secondary text-2xl font-bold text-center basis-0 border-2 border-transparent"
+				class:fretmarker-dot-bottom={fretMarkerHasDot(fretMarker)}
+				class:fretmarker-double-dot-bottom={fretMarkerHasDoubleDot(fretMarker)}>
 				{fretMarker}
 			</div>
 		{/each}
@@ -158,10 +175,37 @@
 	}
 
 	.active {
-		background: theme(colors.secondary);
+		background: theme(colors.secondary) !important;
 	}
 
 	.open {
 		background: theme(colors.accent);
+	}
+
+	.fretmarker-dot {
+		border-bottom-color:theme(colors.accent);
+		border-style: none none solid none;
+		/* border-top-color:theme(colors.accent); */
+	}
+
+	.fretmarker-double-dot {
+		border-bottom-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+		border-style: none none double none;
+		border-width:4px;
+	}
+
+
+	.fretmarker-dot-bottom {
+		border-top-color:theme(colors.accent);
+		border-style:solid none none none;
+		/* border-top-color:theme(colors.accent); */
+	}
+
+	.fretmarker-double-dot-bottom {
+		border-top-color:theme(colors.accent);
+		/* border-top-color:theme(colors.accent); */
+		border-style:double none none none;
+		border-width:4px;
 	}
 </style>
