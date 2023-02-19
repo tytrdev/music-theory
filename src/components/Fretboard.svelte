@@ -14,6 +14,8 @@
 
 	$: microView = windowWidth < minWidthForFullFretboard;
 
+	let hideStringNumbers = microView || false;
+
 	// Includes 0th fret
 	$: NUM_FRETS = microView ? 8 : 23;
 
@@ -23,7 +25,7 @@
 		const sequence = new Sequence(ALL_NOTES);
 		sequence.moveTo(note);
 
-		if (microView) {
+		if (hideStringNumbers) {
 			return sequence.take(NUM_FRETS);
 		}
 
@@ -32,7 +34,7 @@
 
 	// Easy way to get 24 elements mapped to indices
 	// Better than typing out an array with 0 - 23
-	$: fretMarkers = microView
+	$: fretMarkers = hideStringNumbers
 		? Array(NUM_FRETS)
 				.fill(0)
 				.map((_, i) => i)
@@ -69,7 +71,7 @@
 	}
 
 	function fretMarkerHasDot(marker) {
-		return marker === 5 || marker === 7 || marker === 9 || marker === 15 || marker == 17 || marker == 19 || marker == 21;
+		return marker === 3 || marker === 5 || marker === 7 || marker === 9 || marker === 15 || marker == 17 || marker == 19 || marker == 21;
 	}
 
 	function fretMarkerHasDoubleDot(marker) {
@@ -98,8 +100,9 @@
 					class="grow h-8 text-2xl font-bold text-center basis-0 relative mask m-1"
 					class:active={isActive(note)}
 					class:root={isRoot(note)}
-					class:open={microView ? i === 0 : i === 1}
-					class:mask-circle={microView ? i !== 0 : i !== 1}
+					class:open={hideStringNumbers ? i === 0 : i === 1}
+					class:mask-circle={hideStringNumbers ? i !== 0 : i !== 1}
+					class:dark:text-secondary={!hideStringNumbers && i == 0}
 				>
 					{getDisplayInterval(note)}
 
