@@ -106,12 +106,17 @@ export const Scales = {
 	Altered: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 6)),
 	// Harmonic Minor Modes
 	HarmonicMinor: new Sequence(HARMONIC_MINOR_INTERVALS),
-	LocrianNatural6: new Sequence(HARMONIC_MINOR_INTERVALS),
-	IonianSharp5: new Sequence(HARMONIC_MINOR_INTERVALS),
-	DorianSharp11: new Sequence(HARMONIC_MINOR_INTERVALS),
-	PhrygianDominant: new Sequence(HARMONIC_MINOR_INTERVALS),
-	LydianSharp2: new Sequence(HARMONIC_MINOR_INTERVALS),
-	SuperLocrianDoubleFlat7: new Sequence(HARMONIC_MINOR_INTERVALS)
+	LocrianNatural6: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 1)),
+	IonianSharp5: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 2)),
+	DorianSharp11: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 3)),
+	PhrygianDominant: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 4)),
+	LydianSharp2: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 5)),
+	SuperLocrianDoubleFlat7: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 6)),
+	// Whole tone
+	WholeTone: new Sequence([0, 2, 4, 6, 8, 10]),
+	// Whole half diminished
+	DiminishedWholeHalf: new Sequence([0, 2, 3, 5, 6, 8, 9, 11]),
+	DiminishedHalfWhole: new Sequence([0, 1, 3, 4, 6, 7, 9, 10]),
 };
 
 export const Arpeggios = {
