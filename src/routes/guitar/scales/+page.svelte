@@ -9,7 +9,6 @@
 		type ScaleSequence
 	} from '$lib/theory';
 	import Fretboard from '../../../components/Fretboard.svelte';
-	import Settings from '../../../components/Settings.svelte';
 
 	// Selections
 	const scales = Object.keys(Scales);
@@ -22,7 +21,7 @@
 	$: scaleNotes = getNotes(note, scale);
 
 	function getNotes(note: Note, scale: ScaleSequence) {
-        return getScaleNotesFromRoot(note, scale);
+		return getScaleNotesFromRoot(note, scale);
 	}
 
 	// TODO: Make sure same exact root/scale combo can't be chosen
@@ -62,5 +61,3 @@
 <div class="flex flex-col w-full">
 	<Fretboard root={note} notes={scaleNotes} />
 </div>
-
-<Settings />

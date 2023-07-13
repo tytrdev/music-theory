@@ -1,6 +1,10 @@
-<div class="bottom-0 items-center p-8 mt-5"></div>
+<script>
+	import Settings from './Settings.svelte';
+</script>
+
+<div class="bottom-0 items-center p-8 mt-5" />
 <footer class="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
-	<div class="flex justify-center w-full">
+	<div class="flex justify-left w-full">
 		<!-- Twitter -->
 		<a href="https://twitter.com/tytr_dev" target="_blank" rel="noreferrer"
 			><svg
@@ -49,5 +53,9 @@
 				/>
 			</svg>
 		</a>
+	</div>
+
+	<div class="absolute right-0">
+		<Settings />
 	</div>
 </footer>

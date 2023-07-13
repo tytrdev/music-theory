@@ -5,6 +5,10 @@
 			<h1 class="mb-5 text-5xl font-bold">Music Theory Tools</h1>
 
 			<a href="/guitar/scales" class="btn w-full btn-primary">Fretboard - Scales</a>
+			<a href="/guitar/multiscales" class="btn w-full mt-5 btn-primary"
+				>Fretboard - Multiple Scales</a
+			>
+			<!-- <a href="/guitar/shells" class="btn w-full mt-5 btn-primary">Fretboard - Shell Voicings</a> -->
 			<a href="/guitar/arpeggios" class="btn w-full mt-5 btn-primary">Fretboard - Arpeggios</a>
 
 			<div class="text-left">
@@ -22,7 +26,9 @@
 			<div class="text-left">
 				<h2 class="text-primary text-4xl">What is this?</h2>
 
-				<p class="mt-5">An experimental collection of music theory tools, designed to grow over time.</p>
+				<p class="mt-5">
+					An experimental collection of music theory tools, designed to grow over time.
+				</p>
 				<p class="mt-5">Reach out if you are interested in helping me build this.</p>
 				<p class="mt-5">I could really use a hand with the overall design.</p>
 				<p class="mt-5">I'll probably make this open source soon, once I clean up the code.</p>

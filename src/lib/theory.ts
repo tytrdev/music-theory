@@ -63,6 +63,7 @@ const MINOR_PENTATONIC_INTERVALS = [0, 3, 5, 7, 10];
 const MAJOR_PENTATONIC_INTERVALS = [0, 2, 4, 7, 9];
 const MAJOR_INTERVALS = [0, 2, 4, 5, 7, 9, 11];
 const MELODIC_MINOR_INTERVALS = [0, 2, 3, 5, 7, 9, 11];
+const HARMONIC_MAJOR_INTERVALS = [0, 2, 4, 5, 7, 8, 11];
 const HARMONIC_MINOR_INTERVALS = [0, 2, 3, 5, 7, 8, 11];
 
 // Quick utility for modes
@@ -104,6 +105,14 @@ export const Scales = {
 	LocrianSharp2: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 5)),
 	SuperLocrian: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 6)),
 	Altered: new Sequence(rotateIntervals(MELODIC_MINOR_INTERVALS, 6)),
+	// Harmonic Major Modes
+	HarmonicMajor: new Sequence(HARMONIC_MAJOR_INTERVALS),
+	DorianFlat5: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 1)),
+	PhrygianFlat4: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 2)),
+	LydianFlat3: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 3)),
+	MixolydianFlat2: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 4)),
+	LydianAugmentedSharp2: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 5)),
+	LocrianDoubleFlat7: new Sequence(rotateIntervals(HARMONIC_MAJOR_INTERVALS, 6)),
 	// Harmonic Minor Modes
 	HarmonicMinor: new Sequence(HARMONIC_MINOR_INTERVALS),
 	LocrianNatural6: new Sequence(rotateIntervals(HARMONIC_MINOR_INTERVALS, 1)),

@@ -15,14 +15,19 @@
 		});
 	}
 
-    // function setHFlip() {
-    // }
+	// function setHFlip() {
+	// }
 </script>
 
-<div class="flex flex-col md:flex-row mt-10">
+<div class="flex flex-col md:flex-row">
 	<div class="flex items-center">
 		<label for="tuning" class="mr-5">Tuning</label>
-		<select class="select select-primary select-md mr-5" value={$tuning} name="tuning" on:change={setTuning}>
+		<select
+			class="select select-primary select-md mr-5"
+			value={$tuning}
+			name="tuning"
+			on:change={setTuning}
+		>
 			{#each tuningKeys as tuningKey}
 				<option value={tuningKey}>
 					{tuningKey}

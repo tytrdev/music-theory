@@ -1,18 +1,14 @@
 # Tasks
 
 ## Initial Release
+- Clean up legend
 - Clean up scale/chord names for selections
-- Fix interval names
-- Add exhaustive list of scales and chords 
+- Add big list of chords
 - Make scales/chords directly linkable/bookmarkable
 
-- Experiment with adding circles or whatever to active notes
-- Recommendations page (logseq/notion, etc)
 - Page talking about fourths tuning
 - Make scales vs. arpeggios a switchable option
   - As opposed to two separate pages...
-
-- Vercel build
 
 # Major features
 
