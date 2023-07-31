@@ -2,12 +2,14 @@
 	import {
 		ALL_NOTES,
 		getArpeggioNotesFromRoot,
-		Arpeggios,
+		getScaleNotesFromRoot,
+		Naturals,
+		Scales,
 		type Note,
 		type ScaleSequence
 	} from '$lib/theory';
 	import Fretboard from '../../../components/Fretboard.svelte';
-	import Settings from '../../../components/Settings.svelte';
+	import Arpeggios from '../arpeggios.svelte';
 
 	// Selections
 	const arpeggios = Object.keys(Arpeggios);
@@ -22,20 +24,11 @@
 	function getNotes(note: Note, arpeggio: ScaleSequence) {
 		return getArpeggioNotesFromRoot(note, arpeggio);
 	}
-
-	// TODO: Make sure same exact root/scale combo can't be chosen
-	function chooseRandomAreppegio(): void {
-		const noteIndex = Math.floor(Math.random() * ALL_NOTES.length);
-		const arpeggioIndex = Math.floor(Math.random() * Object.keys(Arpeggios).length);
-
-		const arpeggioKey = Object.keys(Arpeggios)[arpeggioIndex];
-
-		selectedNote = ALL_NOTES[noteIndex];
-		selectedArpeggio = arpeggioKey;
-	}
 </script>
 
-<h1 class="text-4xl mb-5">Fretboard Visualizer - Arpeggios</h1>
+<h1 class="text-4xl mb-5">Fretboard Visualizer - Scales by Chord</h1>
+
+<p>A listing of same-root scales that could theoretically be used over a chord.</p>
 
 <div class="flex mb-5 flex-col md:flex-row">
 	<span class="text-3xl mr-5 self-center">Note</span>
@@ -53,10 +46,8 @@
 			<option>{arpeggio}</option>
 		{/each}
 	</select>
-
-	<button on:click={chooseRandomAreppegio} class="btn btn-lg btn-primary">Random Arpeggio</button>
 </div>
 
 <div class="flex flex-col w-full">
-	<Fretboard root={note} notes={arpeggioNotes} />
+	<!-- <Fretboard root={note} notes={scaleNotes} /> -->
 </div>

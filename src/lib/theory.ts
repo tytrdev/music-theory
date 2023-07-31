@@ -38,6 +38,22 @@ export enum Intervals {
 	MajorSeventh = 11
 }
 
+export const IntervalValues = {
+	Root: 0,
+	Octave: 12,
+	MinorSecond: 1,
+	MajorSecond: 2,
+	MinorThird: 3,
+	MajorThird: 4,
+	PerfectFourth: 5,
+	AugmentedFourth: 6,
+	PerfectFifth: 7,
+	MinorSixth: 8,
+	MajorSixth: 9,
+	MinorSeventh: 10,
+	MajorSeventh: 11
+}
+
 // A note is either a Natural or an Accidental
 // This is a union type (and if it's not I should change this)
 export type Note = Naturals | Accidentals;
@@ -167,6 +183,7 @@ export function getScaleNotesFromRoot(root: Note, scale: ScaleSequence) {
 
 // This is way overly complicated...
 export function getArpeggioNotesFromRoot(root: Note, arpeggio: ArpeggioSequence) {
+	console.log("Getting arpeggio notes: ", root, arpeggio);
 	const noteSequence = new Sequence(ALL_NOTES);
 	noteSequence.moveTo(root);
 
