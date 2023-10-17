@@ -1,40 +1,21 @@
-# create-svelte
+# Music Theory
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A tool for music theory and guitar/fretboard visualization.
 
-## Creating a project
+[Live version](https://music-theory-lac.vercel.app/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Why?
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+I've been hacking on this slowly for a bit. It started as a way to visualize scales for myself.
+This became more important after I switched from standard tuning to fourths tuning.
+I also couldn't find any good open source tools so I decided to make this one with the intention of making it open source.
 
-# create a new project in my-app
-npm init svelte@next my-app
-```
+## Vision?
 
-> Note: the `@next` is temporary
+Eventually I'd like this to be a complete set of tools for any stringed-instrument player.
 
-## Developing
+## Technical stuff
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This project uses Svelte/Typescript. I've been thinking about trying to port this over to clojurescript for a while.
+Actually the first thing I did was implement a clojure-inspired sequence abstraction. Although it's pretty terrible.
+Clojurescript (and potentially datascript) would just give me a ton of tools to implement other features.
