@@ -1,6 +1,6 @@
 <script>
 	import { ALL_TUNINGS } from '$lib/tunings';
-	import { tuning } from '../stores';
+	import { tuning, frets } from '../stores';
 
 	const tuningKeys = Object.keys(ALL_TUNINGS);
 
@@ -15,11 +15,28 @@
 		});
 	}
 
+	function setFrets(e) {
+		console.log('Setting frets to: ', e.target.value);
+		frets.set(e.target.value);
+	}
+
 	// function setHFlip() {
 	// }
 </script>
 
 <div class="flex flex-col md:flex-row">
+	<div class="flex items-center">
+		<label for="frets" class="mr-5">Frets {$frets}</label>
+		<input
+			type="range"
+			min={7}
+			max={24}
+			value={$frets}
+			on:change={setFrets}
+			class="range range-primary range-md"
+		/>
+	</div>
+
 	<div class="flex items-center">
 		<label for="tuning" class="mr-5">Tuning</label>
 		<select

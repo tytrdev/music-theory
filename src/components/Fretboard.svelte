@@ -3,7 +3,7 @@
 	import { ALL_NOTES, intervalBetween, type Note } from '$lib/theory';
 	import { ALL_TUNINGS } from '$lib/tunings';
 
-	import { tuning } from '../stores';
+	import { tuning, frets } from '../stores';
 
 	export let root: Note;
 	export let notes: Array<Note>;
@@ -23,7 +23,7 @@
 	$: hideStringNumbers = forceHideStringNumbers || miniView || microView || false;
 
 	// Includes 0th fret
-	$: NUM_FRETS = miniView ? 8 : microView ? 5 : 23;
+	$: NUM_FRETS = miniView ? 8 : microView ? 5 : $frets;
 
 	$: tuningNotes = ALL_TUNINGS[$tuning];
 
