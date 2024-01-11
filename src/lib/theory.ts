@@ -52,7 +52,7 @@ export const IntervalValues = {
 	MajorSixth: 9,
 	MinorSeventh: 10,
 	MajorSeventh: 11
-}
+};
 
 // A note is either a Natural or an Accidental
 // This is a union type (and if it's not I should change this)
@@ -100,9 +100,9 @@ export type ArpeggioSequence = Sequence<number>;
 
 // TODO: Add more scales
 export const Scales = {
-  // Pentatonic Scales
-  MinorPentatonic: new Sequence(MINOR_PENTATONIC_INTERVALS),
-  MajorPentatonic: new Sequence(MAJOR_PENTATONIC_INTERVALS),
+	// Pentatonic Scales
+	MinorPentatonic: new Sequence(MINOR_PENTATONIC_INTERVALS),
+	MajorPentatonic: new Sequence(MAJOR_PENTATONIC_INTERVALS),
 	// Major scale modes
 	Major: new Sequence(MAJOR_INTERVALS),
 	Dorian: new Sequence(rotateIntervals(MAJOR_INTERVALS, 1)),
@@ -141,23 +141,28 @@ export const Scales = {
 	WholeTone: new Sequence([0, 2, 4, 6, 8, 10]),
 	// Whole half diminished
 	DiminishedWholeHalf: new Sequence([0, 2, 3, 5, 6, 8, 9, 11]),
-	DiminishedHalfWhole: new Sequence([0, 1, 3, 4, 6, 7, 9, 10]),
+	DiminishedHalfWhole: new Sequence([0, 1, 3, 4, 6, 7, 9, 10])
 };
 
 export const Arpeggios = {
 	Major: new Sequence([0, 4, 7]),
+	Maj7: new Sequence([0, 4, 7, 11]),
+	Maj7Sharp11: new Sequence([0, 4, 6, 11]),
+	Maj7Sharp5: new Sequence([0, 4, 6, 11]),
+	DimMaj7: new Sequence([0, 3, 6, 11]),
 	Minor: new Sequence([0, 3, 7]),
-	Diminished: new Sequence([0, 3, 6]),
-	Major7: new Sequence([0, 4, 7, 11]),
+	Minor6: new Sequence([0, 3, 6]),
 	Minor7: new Sequence([0, 3, 7, 10]),
-	Dominant: new Sequence([0, 4, 7, 10]),
 	Minor7b5: new Sequence([0, 3, 6, 10]),
-	Minor6: new Sequence([0, 3, 7, 9]),
-	MinorMaj7: new Sequence([0, 3, 7, 11]),
-	Fifth: new Sequence([0, 7]),
-	Thirteen: new Sequence([0, 4, 7, 9, 10]),
-	Eleven: new Sequence([0, 4, 5, 7, 10]),
-	Nine: new Sequence([0, 2, 4, 7, 10])
+	MinMaj7: new Sequence([0, 3, 7, 11]),
+	Sus4b9: new Sequence([0, 5, 7, 1]),
+	Dominant: new Sequence([0, 4, 7, 10]),
+	Dom7Sus4: new Sequence([0, 5, 7, 10]),
+	Dom7Sharp11: new Sequence([0, 4, 6, 7, 10]),
+	Dom7b9: new Sequence([0, 1, 4, 7, 10]),
+	Dom7Sharp9: new Sequence([0, 3, 4, 7, 10]),
+	Dom7Dim: new Sequence([0, 4, 7, 10]),
+	Diminished: new Sequence([0, 3, 6])
 };
 
 // This is way overly complicated...
@@ -183,7 +188,7 @@ export function getScaleNotesFromRoot(root: Note, scale: ScaleSequence) {
 
 // This is way overly complicated...
 export function getArpeggioNotesFromRoot(root: Note, arpeggio: ArpeggioSequence) {
-	console.log("Getting arpeggio notes: ", root, arpeggio);
+	console.log('Getting arpeggio notes: ', root, arpeggio);
 	const noteSequence = new Sequence(ALL_NOTES);
 	noteSequence.moveTo(root);
 
