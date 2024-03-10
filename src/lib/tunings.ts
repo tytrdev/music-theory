@@ -24,6 +24,7 @@ export const ALL_TUNINGS = {
     "Guitar - D Fourths": dFourths,
     "Guitar - 7 Standard": sevenStringStandard,
     "Guitar - 8 Standard": eightStringStandard,
+    "Guitar - 8 Fourths": eightStringFourths,
     "Bass - Standard": bassStandard,
     "Bass - 5 Standard": bassFiveStandard,
     "Bass - 6 Standard": bassSixStandard,
