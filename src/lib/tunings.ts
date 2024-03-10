@@ -10,6 +10,7 @@ export const dFourths: Tuning = [Naturals.D, Naturals.G, Naturals.C, Naturals.F,
 // Extended Range Guitar Tunings
 export const sevenStringStandard: Tuning = [Naturals.B, Naturals.E, Naturals.A, Naturals.D, Naturals.G, Naturals.B, Naturals.E];
 export const eightStringStandard: Tuning = [Accidentals.Fs, Naturals.B, Naturals.E, Naturals.A, Naturals.D, Naturals.G, Naturals.B, Naturals.E];
+export const eightStringFourths: Tuning = [Accidentals.Fs, Naturals.B, Naturals.E, Naturals.A, Naturals.D, Naturals.G, Naturals.C, Naturals.F];
 
 // Bass Guitar Tunings
 export const bassStandard: Tuning = [Naturals.E, Naturals.A, Naturals.D, Naturals.G];
